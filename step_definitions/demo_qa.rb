@@ -39,12 +39,10 @@ end
   driver.find_element(:xpath, "//*[@id='ui-id-5']").click
 #storing title of tab 3
   tabThreeTitle = driver.find_element(:xpath, "//*[@id='ui-id-3']").text
-#displaying on console
-  puts tabThreeTitle
+
 #storing title of tab 5
   tabFiveTitle = driver.find_element(:xpath, "//*[@id='ui-id-5']").text
-#displaying on console
-  puts tabFiveTitle
+
 
 #click on Demo dropdown menu
   driver.find_element(:css, "#menu-item-66 > a").click
