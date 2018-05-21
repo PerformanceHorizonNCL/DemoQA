@@ -1,95 +1,116 @@
 
+#module with class and function to find the outlier in a given array
+module Puzzle
+  class HandArrays
+    #function find the function to find the outlier in a given array
+    def findOutlier(*array)
+#select all even numbers
+      even = array.select {|num| num.even?}
+      #select all even numbers
+      odd = array.select {|num| num.odd?}
+      #Conditional statement to find outlier number
+      if even.count> odd.count
+        return odd
+      else
+        return even
+      end
+    end
+  end
+end
+
+
 #calling selenium webdriver
-require 'selenium-webdriver'
+  require 'selenium-webdriver'
 
 #calling firefox driver
-driver = Selenium::WebDriver.for :firefox
+  driver = Selenium::WebDriver.for :firefox
 
 #maximize browser
-driver.manage.window.maximize
+  driver.manage.window.maximize
 
 #opening  WAUT
-driver.get "http://demoqa.com/"
+  driver.get "http://demoqa.com/"
 
 #click on tabs 1 to 5
-driver.find_element(:xpath, "//*[@id='ui-id-1']").click
-driver.find_element(:xpath, "//*[@id='ui-id-2']").click
-driver.find_element(:xpath, "//*[@id='ui-id-3']").click
-driver.find_element(:xpath, "//*[@id='ui-id-4']").click
-driver.find_element(:xpath, "//*[@id='ui-id-5']").click
+  driver.find_element(:xpath, "//*[@id='ui-id-1']").click
+  driver.find_element(:xpath, "//*[@id='ui-id-2']").click
+  driver.find_element(:xpath, "//*[@id='ui-id-3']").click
+  driver.find_element(:xpath, "//*[@id='ui-id-4']").click
+  driver.find_element(:xpath, "//*[@id='ui-id-5']").click
 #storing title of tab 3
-tabThreeTitle = driver.find_element(:xpath, "//*[@id='ui-id-3']").text
+  tabThreeTitle = driver.find_element(:xpath, "//*[@id='ui-id-3']").text
 #displaying on console
-puts tabThreeTitle
+  puts tabThreeTitle
 #storing title of tab 5
-tabFiveTitle = driver.find_element(:xpath, "//*[@id='ui-id-5']").text
+  tabFiveTitle = driver.find_element(:xpath, "//*[@id='ui-id-5']").text
 #displaying on console
-puts tabFiveTitle
+  puts tabFiveTitle
 
 #click on Demo dropdown menu
-driver.find_element(:css, "#menu-item-66 > a").click
+  driver.find_element(:css, "#menu-item-66 > a").click
 
 # click on Tabs menu under Demo menu
-driver.find_element(:link, "Tabs").click
+  driver.find_element(:link, "Tabs").click
 # click on Registration button
-driver.find_element(:link, "Registration").click
+  driver.find_element(:link, "Registration").click
 # fill FirstName field using previously stored variable above
-driver.find_element(:name, "first_name").send_keys(tabThreeTitle)
+  driver.find_element(:name, "first_name").send_keys(tabThreeTitle)
 # fill LastName field using previously stored variable above
-driver.find_element(:name, "last_name").send_keys(tabFiveTitle )
+  driver.find_element(:name, "last_name").send_keys(tabFiveTitle)
 # click on married radio button
-driver.find_element(:xpath, "//input[@value='married']").click
+  driver.find_element(:xpath, "//input[@value='married']").click
 # click on cricket radio button
-driver.find_element(:xpath, "//input[contains(@value,'cricket')]").click
+  driver.find_element(:xpath, "//input[contains(@value,'cricket')]").click
 # click on Country dropdown and select Austria by Value
-driver.find_element(:xpath, "//*[@id='dropdown_7']").find_element(:css, "option[value='Austria']").click
+  driver.find_element(:xpath, "//*[@id='dropdown_7']").find_element(:css, "option[value='Austria']").click
 
 # click on Month dropdown and select 5th month by Index
-driver.find_element(:id, "mm_date_8").find_element(:css, "option:nth-child(6)").click
+  driver.find_element(:id, "mm_date_8").find_element(:css, "option:nth-child(6)").click
 # click on Day dropdown and select 21
-driver.find_element(:name, "date_8[date][dd]").find_element(:css, "option[value='21']").click
+  driver.find_element(:name, "date_8[date][dd]").find_element(:css, "option[value='21']").click
 # ciick on Year dropdown and select 1992
-driver.find_element(:xpath, "//*[@id='yy_date_8']").find_element(:css, "option[value='1992']").click
+  driver.find_element(:xpath, "//*[@id='yy_date_8']").find_element(:css, "option[value='1992']").click
 # enter phone number
-driver.find_element(:name, "phone_9").send_keys("09119119111")
-x =rand(1000)
-puts x
+  driver.find_element(:name, "phone_9").send_keys("09119119111")
+  x = rand(1000)
+
 # enter username
-driver.find_element(:name, "username").send_keys("performance@horizon.com"+x.to_s)
+  driver.find_element(:name, "username").send_keys("performance@horizon.com" + x.to_s)
 
 # enter email id
-driver.find_element(:name, "e_mail").send_keys("performance"+x.to_s+"@horizon.com")
+  driver.find_element(:name, "e_mail").send_keys("performance" + x.to_s + "@horizon.com")
 # this website is not accepting any file type so I have commented the test step below
 # upload profile picture
 #driver.find_element(:name, "profile_pic_10").send_keys("C:\\022.JPG")
 
 
-#calling puzzle function to find the outlier in the given arrays
-outlierOfFirstArray=0
-outlierOfSecondArray=0
-outlierOfFirstArray+= FindingOutlier.new.findOutlier(2, 4, 0, 100, 4, 11, 2602, 36)
-outlierOfSecondArray+= FindingOutlier.new.findOutlier(160, 3, 1719, 19, 11, 13, -21)
+#calling puzzle.rb function to find the outlier in the given arrays
+outputSecondArray= Puzzle::HandArrays.new
+numberTwo= outputSecondArray.findOutlier(160, 3, 1719, 19, 11, 13, -21)
 
+numberOne= outputSecondArray.findOutlier(22, 24, 0, 100, 4, 111, 2602, 18)
 # enter text in About Yourself field
-driver.find_element(:xpath, "//textarea[@id='description']").send_keys("I am Software tester"+outlierOfFirstArray+outlierOfSecondArray)
-
+  driver.find_element(:xpath, "//textarea[@id='description']").send_keys("I am Software tester"+numberTwo.to_s+numberOne.to_s)
 
 
 # enter password
-driver.find_element(:css, "#password_2").send_keys("performance@horizon.com")
+  driver.find_element(:css, "#password_2").send_keys("performance@horizon.com")
 
 # enter confirm password
-driver.find_element(:css, "#confirm_password_password_2").send_keys("performance@horizon.com")
+  driver.find_element(:css, "#confirm_password_password_2").send_keys("performance@horizon.com")
 
 # click on Submit button
-driver.find_element(:name, "pie_submit").click
+  driver.find_element(:name, "pie_submit").click
 
 # capture confirmation message following submission of registration page
-confirmationMsg = driver.find_element(:xpath, "//*[@id='post-49']/div/p").text
+  confirmationMsg = driver.find_element(:xpath, "//*[@id='post-49']/div/p").text
 
-if (confirmationMsg =="Thank you for your registration")
-  puts "Registration is successful"
-else
-  driver.save_screenshot("C:\\Users\\sharathcg\\RubymineProjectz\\PH\\Screenshot")
-end
-driver.close
+  if (confirmationMsg == "Thank you for your registration")
+    puts "Registration is successful"
+  else
+    driver.save_screenshot("C:\\Users\\sharathcg\\RubymineProjectz\\PH\\Screenshot")
+  end
+  driver.close
+
+
+
