@@ -70,13 +70,17 @@ end
   driver.find_element(:xpath, "//*[@id='yy_date_8']").find_element(:css, "option[value='1992']").click
 # enter phone number
   driver.find_element(:name, "phone_9").send_keys("09119119111")
-  x = rand(1000)
+#generating random string for username and email id
+
+random_string = ([*('A'..'Z'),*('0'..'9')]-%w(0 1 I O)).sample(8).join
+puts random_string
+x = rand(10000)
 
 # enter username
-  driver.find_element(:name, "username").send_keys("performance@horizon.com" + x.to_s)
+driver.find_element(:name, "username").send_keys(random_string + x.to_s)
 
 # enter email id
-  driver.find_element(:name, "e_mail").send_keys("performance" + x.to_s + "@horizon.com")
+driver.find_element(:name, "e_mail").send_keys(random_string+ x.to_s + "@horizon.com")
 # this website is not accepting any file type so I have commented the test step below
 # upload profile picture
 #driver.find_element(:name, "profile_pic_10").send_keys("C:\\022.JPG")
@@ -106,7 +110,8 @@ numberOne= outputSecondArray.findOutlier(22, 24, 0, 100, 4, 111, 2602, 18)
   if (confirmationMsg == "Thank you for your registration")
     puts "Registration is successful"
   else
-    driver.save_screenshot("C:\\Users\\sharathcg\\RubymineProjectz\\PH\\Screenshot")
+    Dir.mkdir "C:\\screenshots"
+    driver.save_screenshot("C:\\screenshots\\screenshot.png")
   end
   driver.close
 
